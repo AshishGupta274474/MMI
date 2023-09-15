@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v3t-Ic-Wv7">
+                                <rect key="frame" x="76.666666666666686" y="342.33333333333331" width="240" height="167.33333333333331"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X7C-gD-Rzx">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon" highlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pFu-Jd-PW5">
+                                                <rect key="frame" x="69.999999999999986" y="14" width="100.00000000000001" height="100"/>
+                                                <color key="tintColor" systemColor="labelColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="d0K-sl-gwe"/>
+                                                    <constraint firstAttribute="width" constant="100" id="guk-ht-tSe"/>
+                                                </constraints>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="pFu-Jd-PW5" firstAttribute="centerX" secondItem="X7C-gD-Rzx" secondAttribute="centerX" id="L34-4K-McL"/>
+                                            <constraint firstItem="pFu-Jd-PW5" firstAttribute="centerY" secondItem="X7C-gD-Rzx" secondAttribute="centerY" id="ecI-4x-S92"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Me Myself And I" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1A-4O-6mW">
+                                        <rect key="frame" x="0.0" y="136" width="240" height="31.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="2D5-YS-vle"/>
+                                    <constraint firstItem="K1A-4O-6mW" firstAttribute="top" secondItem="X7C-gD-Rzx" secondAttribute="bottom" constant="8" symbolic="YES" id="ADd-zK-KUI"/>
+                                    <constraint firstAttribute="height" constant="167.33000000000001" id="IOE-a7-eMG"/>
+                                    <constraint firstItem="X7C-gD-Rzx" firstAttribute="leading" secondItem="v3t-Ic-Wv7" secondAttribute="leading" id="hdK-Cm-TIJ"/>
+                                    <constraint firstItem="X7C-gD-Rzx" firstAttribute="top" secondItem="v3t-Ic-Wv7" secondAttribute="top" id="otv-Gl-KGD"/>
+                                    <constraint firstAttribute="trailing" secondItem="X7C-gD-Rzx" secondAttribute="trailing" id="uL9-Kl-BIy"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="v3t-Ic-Wv7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Drq-vI-dkn"/>
+                            <constraint firstItem="v3t-Ic-Wv7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="b3y-YZ-ZH2"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icon" width="482" height="518"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

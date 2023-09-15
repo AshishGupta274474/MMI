@@ -1,0 +1,6 @@
+framework module Pods_MMI {
+  umbrella header "Pods-MMI-umbrella.h"
+
+  export *
+  module * { export * }
+}
