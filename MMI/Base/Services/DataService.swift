@@ -29,7 +29,7 @@ class DataService: DataServiceProtocol {
                     let tasks = try JSONDecoder().decode([T].self, from: data)
                     result.append(contentsOf: tasks)
                 } catch {
-                    print("Unable to Decode tasks (\(error))")
+                    print("Unable to Decode (\(error))")
                 }
             }
         }
@@ -42,7 +42,7 @@ class DataService: DataServiceProtocol {
                 let data = try JSONEncoder().encode(values)
                 self.userDefaults.set(data, forKey: key)
             } catch {
-                print("Unable to Encode tasks (\(error))")
+                print("Unable to Encode (\(error))")
             }
         }
     }

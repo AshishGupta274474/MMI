@@ -70,5 +70,9 @@ class Task : Codable {
         try container.encode(uuid, forKey: .uuid)
         try container.encode(date, forKey: .date)
     }
+    
+    static func ==(lhs: Task, rhs: Task) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
 }
 
