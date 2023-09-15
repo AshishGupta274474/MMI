@@ -27,7 +27,9 @@ class CategoryVC: MMIBaseVC {
         super.setUpView()
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        let width = (UIScreen.main.bounds.width - 4*Constant.paddingSmall)/4
+        layout.minimumInteritemSpacing = 0;
+        layout.minimumLineSpacing = 0;
+        let width = (UIScreen.main.bounds.width)/2
         layout.itemSize = CGSize(width: width, height: width)
         
         myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)

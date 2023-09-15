@@ -17,21 +17,21 @@ class TaskRecordVC: MMIBaseVC {
     lazy var upperView = UIView()
     
     var bottomConstrant: NSLayoutConstraint!
-
+    
     override func setUpView() {
         super.setUpView()
         // Keyboard stuff.
         NotificationCenter.default.addObserver(
-               self,
-               selector: #selector(self.keyboardWillShow),
-               name: UIResponder.keyboardWillShowNotification,
-               object: nil)
-
-           NotificationCenter.default.addObserver(
-               self,
-               selector: #selector(self.keyboardWillHide),
-               name: UIResponder.keyboardWillHideNotification,
-               object: nil)
+            self,
+            selector: #selector(self.keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
         
         textView.becomeFirstResponder()
         
@@ -41,6 +41,7 @@ class TaskRecordVC: MMIBaseVC {
         highPriorityButton.backgroundColor = UIColor.init(named: "KeyboardButton")
         highPriorityButton.layer.cornerRadius = Constant.cornerRadiusSmall
         highPriorityButton.titleLabel?.font = UIFont.systemFont(ofSize: 12.0)
+        highPriorityButton.addTarget(self, action: #selector(addHighPriorityTask), for: .touchUpInside)
         
         let lowPriorityButton = UIButton()
         lowPriorityButton.setTitle("  \(TaskPriority.low.title)  ", for: .normal)
@@ -48,7 +49,8 @@ class TaskRecordVC: MMIBaseVC {
         lowPriorityButton.backgroundColor = UIColor.init(named: "KeyboardButton")
         lowPriorityButton.layer.cornerRadius = Constant.cornerRadiusSmall
         lowPriorityButton.titleLabel?.font = UIFont.systemFont(ofSize: 12.0)
-
+        lowPriorityButton.addTarget(self, action: #selector(addLowPriorityTask), for: .touchUpInside)
+        
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         buttonStackView.axis = .horizontal
         
@@ -87,14 +89,13 @@ class TaskRecordVC: MMIBaseVC {
             textView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constant.paddingStandard),
             textView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Constant.paddingStandard),
             textView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            
-
+                        
             buttonStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Constant.paddingStandard),
             buttonStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -Constant.paddingSmall),
             buttonStackView.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: Constant.paddingSmall),
             buttonStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constant.paddingStandard),
             buttonStackView.heightAnchor.constraint(equalToConstant: 32.0),
-
+            
             outercontainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             outercontainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             outercontainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -117,50 +118,51 @@ class TaskRecordVC: MMIBaseVC {
     }
     
     @objc func keyboardWillShow(_ notification: NSNotification) {
-                moveViewWithKeyboard(notification: notification, viewBottomConstraint: self.bottomConstrant, keyboardWillShow: true)
-        }
-        
-        @objc func keyboardWillHide(_ notification: NSNotification) {
-            moveViewWithKeyboard(notification: notification, viewBottomConstraint: self.bottomConstrant, keyboardWillShow: false)
-        }
-        
-        func moveViewWithKeyboard(notification: NSNotification, viewBottomConstraint: NSLayoutConstraint, keyboardWillShow: Bool) {
-            // Keyboard's size
-            guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-            let keyboardHeight = keyboardSize.height
-            
-            // Keyboard's animation duration
-            let keyboardDuration = notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
-            
-            // Keyboard's animation curve
-            let keyboardCurve = UIView.AnimationCurve(rawValue: notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! Int)!
-            
-            // Change the constant
-            if keyboardWillShow {
-                viewBottomConstraint.constant = -(keyboardHeight - 20.0)
-            }else {
-                viewBottomConstraint.constant = 0
-            }
-            
-            // Animate the view the same way the keyboard animates
-            let animator = UIViewPropertyAnimator(duration: keyboardDuration, curve: keyboardCurve) { [weak self] in
-                // Update Constraints
-                self?.view.layoutIfNeeded()
-            }
-            
-            // Perform the animation
-            animator.startAnimation()
-        }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        moveViewWithKeyboard(notification: notification, viewBottomConstraint: self.bottomConstrant, keyboardWillShow: true)
     }
-    */
-
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        moveViewWithKeyboard(notification: notification, viewBottomConstraint: self.bottomConstrant, keyboardWillShow: false)
+    }
+    
+    func moveViewWithKeyboard(notification: NSNotification, viewBottomConstraint: NSLayoutConstraint, keyboardWillShow: Bool) {
+        // Keyboard's size
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        let keyboardHeight = keyboardSize.height
+        
+        // Keyboard's animation duration
+        let keyboardDuration = notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        
+        // Keyboard's animation curve
+        let keyboardCurve = UIView.AnimationCurve(rawValue: notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! Int)!
+        
+        // Change the constant
+        if keyboardWillShow {
+            viewBottomConstraint.constant = -(keyboardHeight - 20.0)
+        }else {
+            viewBottomConstraint.constant = 0
+        }
+        
+        // Animate the view the same way the keyboard animates
+        let animator = UIViewPropertyAnimator(duration: keyboardDuration, curve: keyboardCurve) { [weak self] in
+            // Update Constraints
+            self?.view.layoutIfNeeded()
+        }
+        
+        // Perform the animation
+        animator.startAnimation()
+    }
+    
+    @objc
+    func addHighPriorityTask() {
+        TaskManager.shared.add(Task(priority: .high, value: textView.text))
+        dismissController()
+    }
+    
+    @objc
+    func addLowPriorityTask() {
+        TaskManager.shared.add(Task(priority: .low, value: textView.text))
+        dismissController()
+    }
+    
 }

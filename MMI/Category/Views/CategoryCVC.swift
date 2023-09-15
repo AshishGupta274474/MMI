@@ -47,12 +47,12 @@ class CategoryCVC: MMIBaseCVC {
         
         NSLayoutConstraint.activate([
             
-            titleLable.heightAnchor.constraint(equalToConstant: 16.0),
+            titleLable.heightAnchor.constraint(equalToConstant: 32.0),
             
-            stackView.leadingAnchor.constraint(equalTo: outerView.leadingAnchor, constant: Constant.paddingxSmall),
-            stackView.trailingAnchor.constraint(equalTo: outerView.trailingAnchor, constant: -Constant.paddingxSmall),
-            stackView.topAnchor.constraint(equalTo: outerView.topAnchor, constant: Constant.paddingxSmall),
-            stackView.bottomAnchor.constraint(equalTo: outerView.bottomAnchor, constant: -Constant.paddingxSmall),
+            stackView.leadingAnchor.constraint(equalTo: outerView.leadingAnchor, constant: Constant.paddingSmall),
+            stackView.trailingAnchor.constraint(equalTo: outerView.trailingAnchor, constant: -Constant.paddingSmall),
+            stackView.topAnchor.constraint(equalTo: outerView.topAnchor, constant: Constant.paddingSmall),
+            stackView.bottomAnchor.constraint(equalTo: outerView.bottomAnchor, constant: -Constant.stackSpacingStandard),
             
             // Outer View
             outerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constant.paddingxSmall),
@@ -60,10 +60,10 @@ class CategoryCVC: MMIBaseCVC {
             outerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constant.paddingxSmall),
             outerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constant.paddingxSmall),
             // imageView
-            categoryImage.leadingAnchor.constraint(equalTo: innerView.leadingAnchor, constant: Constant.paddingSmall),
-            categoryImage.trailingAnchor.constraint(equalTo: innerView.trailingAnchor, constant: -Constant.paddingSmall),
-            categoryImage.topAnchor.constraint(equalTo: innerView.topAnchor, constant: Constant.paddingSmall),
-            categoryImage.bottomAnchor.constraint(equalTo: innerView.bottomAnchor, constant: -Constant.paddingSmall),
+            categoryImage.centerYAnchor.constraint(equalTo: innerView.centerYAnchor),
+            categoryImage.centerXAnchor.constraint(equalTo: innerView.centerXAnchor),
+            categoryImage.heightAnchor.constraint(equalTo: innerView.heightAnchor, multiplier: 0.5),
+            categoryImage.widthAnchor.constraint(equalTo: categoryImage.heightAnchor),
             // Outer Stack view
         ])
         

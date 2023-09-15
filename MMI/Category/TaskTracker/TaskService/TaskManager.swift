@@ -7,17 +7,25 @@
 
 import Foundation
 
-protocol TaskManagerProtol: AnyObject {
+protocol TaskManagerProtocol: AnyObject {
     func add(_ task: Task)
     func update(tasks updatedTasks: [Task])
     func remove(tasks updatedTasks: [Task])
     func refreshTask()
+    func fetchAllTask() -> [Task]
+    
+    var updateNotificationName: String { get }
 }
 
-class TaskManager: TaskManagerProtol {
+extension TaskManagerProtocol {
+    var updateNotificationName: String {
+        return "notification.update.task"
+    }
+}
+
+class TaskManager: TaskManagerProtocol {
     
     private let key = "task_data"
-    public static let updateNotificationName = "notification.update.task"
     
     public static let shared = TaskManager()
     private weak var dataService: DataServiceProtocol?
@@ -27,9 +35,9 @@ class TaskManager: TaskManagerProtol {
         self.tasks = []
     }
     
-    private(set) var tasks: [Task] {
+    private var tasks: [Task] {
         didSet {
-            NotificationCenter.default.post(name: Notification.Name(TaskManager.updateNotificationName), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(updateNotificationName), object: nil)
             self.dataService?.update(tasks, for: key)
         }
     }
@@ -69,5 +77,9 @@ class TaskManager: TaskManagerProtol {
             return
         }
         self.tasks = tasks
+    }
+    
+    public func fetchAllTask() -> [Task] {
+        return tasks
     }
 }

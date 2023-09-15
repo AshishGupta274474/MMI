@@ -57,8 +57,8 @@ class TaskTrackerVC: MMIBaseVC {
 
 extension TaskTrackerVC: TaskTrackerDelegate {
     func reloadData() {
-        DispatchQueue.main.async {
-            
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
         }
     }
 }
