@@ -17,6 +17,7 @@ class MMIBaseTVC: UITableViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setUpViews()
     }
     
     func setUpViews() {}
