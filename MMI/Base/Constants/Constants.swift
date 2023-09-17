@@ -10,6 +10,7 @@ import Foundation
 class Constant {
     // MARK: - Spacing
        
+    static let paddingLarge = 24.0
     static let paddingStandard = 16.0
     static let paddingSmall = 8.0
     static let paddingxSmall = 4.0

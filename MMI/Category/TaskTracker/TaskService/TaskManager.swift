@@ -10,7 +10,7 @@ import Foundation
 protocol TaskManagerProtocol: AnyObject {
     func add(_ task: Task)
     func update(tasks updatedTasks: [Task])
-    func remove(tasks updatedTasks: [Task])
+    func remove(_ tasks: [Task])
     func refreshTask()
     func fetchAllTask() -> [Task]
     
@@ -37,6 +37,7 @@ class TaskManager: TaskManagerProtocol {
     
     private var tasks: [Task] {
         didSet {
+            print(tasks)
             NotificationCenter.default.post(name: Notification.Name(updateNotificationName), object: nil)
             self.dataService?.update(tasks, for: key)
         }
@@ -46,16 +47,17 @@ class TaskManager: TaskManagerProtocol {
         tasks.append(task)
     }
     
-    public func remove(tasks updatedTasks: [Task]) {
+    public func remove(_ tasks: [Task]) {
         var resultTask: [Task] = []
-        tasks.forEach { currentTask in
-            if !updatedTasks.contains(where: { updatedTask in
-                return currentTask == updatedTask
+        print(self.tasks)
+        self.tasks.forEach { currentTask in
+            if !tasks.contains(where: { task in
+                return currentTask == task
             }){
                 resultTask.append(currentTask)
             }
         }
-        tasks = resultTask
+        self.tasks = resultTask
     }
     
     public func update(tasks updatedTasks: [Task]) {

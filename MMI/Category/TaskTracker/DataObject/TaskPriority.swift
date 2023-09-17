@@ -27,20 +27,26 @@ enum TaskPriority: String , Codable {
     }
 }
 
-class Task : Codable {
+class Task : NSObject,Codable {
     var priority: TaskPriority
     var value: String
     var completed: Bool
     var uuid: String
     var date : Date
-    var selected: Bool
+    
+    public override var description: String {
+        return "\n{\n value: \(self.value),\n"
+        + " prioriry: \(self.priority.title),\n"
+            + " uuid: \(self.uuid),\n"
+            + " completed: \(self.completed),\n"
+            + " date: \(self.date)\n}"
+    }
     
     init(priority: TaskPriority ,value: String) {
         self.uuid = UUID().uuidString
         self.priority = priority
         self.value = value
         self.completed = false
-        self.selected = false
         self.date = Date.now
     }
     
@@ -59,7 +65,6 @@ class Task : Codable {
         completed = try container.decode(Bool.self, forKey: .completed)
         uuid = try container.decode(String.self, forKey: .uuid)
         date = try container.decode(Date.self, forKey: .date)
-        selected = false
     }
     
     func encode(to encoder: Encoder) throws {

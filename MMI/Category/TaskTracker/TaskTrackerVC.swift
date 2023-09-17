@@ -15,6 +15,8 @@ class TaskTrackerVC: MMIBaseVC {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
+        tableView.sectionHeaderTopPadding = 0
+        tableView.tableFooterView = nil
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.register(TaskTrackerTVC.self, forCellReuseIdentifier: String(describing: TaskTrackerTVC.self))
@@ -81,30 +83,61 @@ extension TaskTrackerVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         viewModel.dataSource.count
     }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.sections[section].title
-    }
-    
+        
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return TaskTableHeaderView(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 48.0), taskPriority: viewModel.sections[section])
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView.init(frame: .zero)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 32.0
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.0
+    }
+    
 }
 
 extension TaskTrackerVC: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard
-            let task = viewModel.dataSource[viewModel.sections[indexPath.section].rawValue]?[indexPath.row] else {
-            return
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive,
+                                        title: "remove") { [weak self] (_, _, completionHandler) in
+            guard
+                let self = self,
+                let task = viewModel.dataSource[viewModel.sections[indexPath.section].rawValue]?[indexPath.row] else {
+                completionHandler(false)
+                return
+            }
+            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+
+            self.viewModel.remove(tasks: [task])
+            completionHandler(true)
         }
-        task.selected = !task.selected
-        tableView.reloadRows(at: [indexPath], with: .none)
+        
+        deleteAction.image = UIImage(named: "trash")?.withRenderingMode(.alwaysTemplate)
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal,
+                                        title: "") { [weak self] (_, _, completionHandler) in
+            guard
+                let self = self,
+                let task = viewModel.dataSource[viewModel.sections[indexPath.section].rawValue]?[indexPath.row] else {
+                completionHandler(false)
+                return
+            }
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            self.viewModel.remove(tasks: [task])
+            completionHandler(true)
+        }
+        
+        deleteAction.backgroundColor = .systemGreen
+        deleteAction.image = UIImage(named: "tick")?.withRenderingMode(.alwaysTemplate)
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }

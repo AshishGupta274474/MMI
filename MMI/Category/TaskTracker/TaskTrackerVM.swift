@@ -38,4 +38,15 @@ class TaskTrackerVM {
         
         delegate?.reloadData()
     }
+    
+    func remove(tasks: [Task]) {
+        taskManager?.remove(tasks)
+    }
+    
+    func complete(tasks: [Task]) {
+        tasks.forEach { task in
+            task.completed = true
+        }
+        taskManager?.update(tasks:tasks)
+    }
 }

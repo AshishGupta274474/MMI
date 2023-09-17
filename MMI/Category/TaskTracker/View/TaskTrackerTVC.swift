@@ -25,6 +25,8 @@ class TaskTrackerTVC: MMIBaseTVC {
         
         selectionImageView.translatesAutoresizingMaskIntoConstraints = false
         selectionImageView.contentMode = .scaleAspectFit
+        selectionImageView.image = UIImage.init(named:"task_arrow")?.withRenderingMode(.alwaysTemplate)
+        selectionImageView.tintColor = .systemBlue
         
         contentView.addSubview(selectionImageView)
         contentView.addSubview(title)
@@ -45,7 +47,5 @@ class TaskTrackerTVC: MMIBaseTVC {
     
     func configureCell(with task: Task) {
         title.text = task.value
-        selectionImageView.image = (task.selected ? UIImage.init(named:"SelectedCircle") : UIImage.init(named: "UnSelectedCircle"))?.withRenderingMode(.alwaysTemplate)
-        selectionImageView.tintColor = task.selected ? .systemBlue : .systemGray
     }
 }
