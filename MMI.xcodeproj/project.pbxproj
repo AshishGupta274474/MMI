@@ -13,6 +13,8 @@
 		1A2D61152A9CE164007E833F /* TaskTrackerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D61142A9CE164007E833F /* TaskTrackerVC.swift */; };
 		1A2D61172A9CF0B4007E833F /* TaskRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D61162A9CF0B4007E833F /* TaskRecordVC.swift */; };
 		1A2D611A2A9CFB2B007E833F /* TaskPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D61192A9CFB2B007E833F /* TaskPriority.swift */; };
+		1A4624142AB76CB30005A97D /* ExpenseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4624132AB76CB30005A97D /* ExpenseManager.swift */; };
+		1A4624162AB7701F0005A97D /* ExpenseTrackerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4624152AB7701F0005A97D /* ExpenseTrackerVM.swift */; };
 		1A51A2DE2AB47CC5001D8D8B /* TaskTrackerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A51A2DD2AB47CC5001D8D8B /* TaskTrackerTVC.swift */; };
 		1A51A2E12AB4928C001D8D8B /* TaskTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A51A2E02AB4928C001D8D8B /* TaskTableHeaderView.swift */; };
 		1A51A2E52AB49B33001D8D8B /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A51A2E42AB49B33001D8D8B /* TaskManager.swift */; };
@@ -80,6 +82,8 @@
 		1A2D61142A9CE164007E833F /* TaskTrackerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTrackerVC.swift; sourceTree = "<group>"; };
 		1A2D61162A9CF0B4007E833F /* TaskRecordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRecordVC.swift; sourceTree = "<group>"; };
 		1A2D61192A9CFB2B007E833F /* TaskPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPriority.swift; sourceTree = "<group>"; };
+		1A4624132AB76CB30005A97D /* ExpenseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseManager.swift; sourceTree = "<group>"; };
+		1A4624152AB7701F0005A97D /* ExpenseTrackerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTrackerVM.swift; sourceTree = "<group>"; };
 		1A51A2DD2AB47CC5001D8D8B /* TaskTrackerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTrackerTVC.swift; sourceTree = "<group>"; };
 		1A51A2E02AB4928C001D8D8B /* TaskTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableHeaderView.swift; sourceTree = "<group>"; };
 		1A51A2E42AB49B33001D8D8B /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
@@ -191,6 +195,14 @@
 				1A2D61192A9CFB2B007E833F /* TaskPriority.swift */,
 			);
 			path = DataObject;
+			sourceTree = "<group>";
+		};
+		1A4624122AB76CA20005A97D /* ExpenseService */ = {
+			isa = PBXGroup;
+			children = (
+				1A4624132AB76CB30005A97D /* ExpenseManager.swift */,
+			);
+			path = ExpenseService;
 			sourceTree = "<group>";
 		};
 		1A51A2DF2AB49275001D8D8B /* View */ = {
@@ -311,8 +323,10 @@
 		1A6BCABA2A7ACBA9009A3613 /* ExpenseTracker */ = {
 			isa = PBXGroup;
 			children = (
+				1A4624122AB76CA20005A97D /* ExpenseService */,
 				1AF8DDBD2AA4CD2100F4E8BD /* DataObject */,
 				1A6BCAC22A7AD019009A3613 /* ExpenseTrackerVC.swift */,
+				1A4624152AB7701F0005A97D /* ExpenseTrackerVM.swift */,
 			);
 			path = ExpenseTracker;
 			sourceTree = "<group>";
@@ -699,6 +713,7 @@
 				1A6BCACB2A7B68A6009A3613 /* CategoryVC.swift in Sources */,
 				1A2D61152A9CE164007E833F /* TaskTrackerVC.swift in Sources */,
 				1A6BCABE2A7ACF47009A3613 /* MMITabBarController.swift in Sources */,
+				1A4624162AB7701F0005A97D /* ExpenseTrackerVM.swift in Sources */,
 				1AF8DDBA2AA4CBAB00F4E8BD /* ScheduleItem.swift in Sources */,
 				1A2D611A2A9CFB2B007E833F /* TaskPriority.swift in Sources */,
 				1A2D610D2A9B8024007E833F /* Category.swift in Sources */,
@@ -709,6 +724,7 @@
 				1A51A2E12AB4928C001D8D8B /* TaskTableHeaderView.swift in Sources */,
 				1A51A2E52AB49B33001D8D8B /* TaskManager.swift in Sources */,
 				1A2D61122A9B91EA007E833F /* RecordTimeVC.swift in Sources */,
+				1A4624142AB76CB30005A97D /* ExpenseManager.swift in Sources */,
 				1AF8DDBC2AA4CC7300F4E8BD /* TimeItem.swift in Sources */,
 				1AF8DDB52AA4CAFF00F4E8BD /* ScheduleTrackerVC.swift in Sources */,
 				1AF8DDB72AA4CB3A00F4E8BD /* ScheduleTrackerVM.swift in Sources */,

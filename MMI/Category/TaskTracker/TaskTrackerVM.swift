@@ -49,4 +49,9 @@ class TaskTrackerVM {
         }
         taskManager?.update(tasks:tasks)
     }
+    
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }

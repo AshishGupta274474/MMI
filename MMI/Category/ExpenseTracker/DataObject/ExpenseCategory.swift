@@ -7,7 +7,79 @@
 
 import UIKit
 
-enum ExpenseCarCategory: String {
+class Expense: Codable {
+    var category: ExpenseCategory
+    var value: Int
+    var date: Date
+    var uuid: String
+    
+    init(category: ExpenseCategory, value: Int, uuid: String, date: Date) {
+        self.category = category
+        self.value = value
+        self.uuid = uuid
+        self.date = date
+    }
+    
+    static func ==(lhs: Expense, rhs: Expense) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+}
+
+enum ExpenseCategory: Codable, Hashable {
+    case car(ExpenseCarCategory)
+    case food(ExpenseFoodCategory)
+    case lesuire(ExpenseLesuireCategory)
+    case travel(ExpenseTravelCategory)
+    case commute(ExpenseCommuteCategory)
+    case shopping(ExpenseShoppingCategory)
+    case selfcare(ExpenseSelfCareCategory)
+    case home(ExpenseHomeCategory)
+    case investment(ExpenseInvestmentCategory)
+    
+    var colorCode: UIColor {
+        switch self {
+        case .car(let value): return value.colorCode
+        case .food(let value): return value.colorCode
+        case .lesuire(let value): return value.colorCode
+        case .travel(let value): return value.colorCode
+        case .commute(let value): return value.colorCode
+        case .shopping(let value): return value.colorCode
+        case .selfcare(let value): return value.colorCode
+        case .home(let value): return value.colorCode
+        case .investment(let value): return value.colorCode
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .car(let value): return value.title
+        case .food(let value): return value.title
+        case .lesuire(let value): return value.title
+        case .travel(let value): return value.title
+        case .commute(let value): return value.title
+        case .shopping(let value): return value.title
+        case .selfcare(let value): return value.title
+        case .home(let value): return value.title
+        case .investment(let value): return value.title
+        }
+    }
+    
+    var type: String {
+        switch self {
+        case .car(let value): return value.type
+        case .food(let value): return value.type
+        case .lesuire(let value): return value.type
+        case .travel(let value): return value.type
+        case .commute(let value): return value.type
+        case .shopping(let value): return value.type
+        case .selfcare(let value): return value.type
+        case .home(let value): return value.type
+        case .investment(let value): return value.type
+        }
+    }
+}
+
+enum ExpenseCarCategory: String,Codable {
     case fuel = "Fuel"
     case repair = "Repair"
     case insurance = "Insurance"
@@ -17,7 +89,7 @@ enum ExpenseCarCategory: String {
     var colorCode: UIColor { return .systemRed }
 }
 
-enum ExpenseFoodCategory: String {
+enum ExpenseFoodCategory: String,Codable {
     case dining = "Dinning"
     case orderIn = "Order"
     case groceries = "Groceries"
@@ -27,7 +99,7 @@ enum ExpenseFoodCategory: String {
     var colorCode: UIColor { return .systemBlue }
 }
 
-enum ExpenseLesuireCategory: String {
+enum ExpenseLesuireCategory: String,Codable {
     case outings = "Outings"
     case others = "Others"
     
@@ -36,7 +108,7 @@ enum ExpenseLesuireCategory: String {
     var colorCode: UIColor { return .systemPink }
 }
 
-enum ExpenseTravelCategory: String {
+enum ExpenseTravelCategory: String,Codable {
     case domestic = "Domestic"
     case international = "International"
     
@@ -45,7 +117,7 @@ enum ExpenseTravelCategory: String {
     var colorCode: UIColor { return .systemMint }
 }
 
-enum ExpenseCommuteCategory: String {
+enum ExpenseCommuteCategory: String,Codable {
     case cabs = "Cabs"
     case flights = "Flights"
     
@@ -54,7 +126,7 @@ enum ExpenseCommuteCategory: String {
     var colorCode: UIColor { return .systemIndigo }
 }
 
-enum ExpenseShoppingCategory: String {
+enum ExpenseShoppingCategory: String,Codable {
     case clothes = "Clothes"
     case gadgets = "Gadgets"
     
@@ -63,7 +135,7 @@ enum ExpenseShoppingCategory: String {
     var colorCode: UIColor { return .systemTeal }
 }
 
-enum ExpenseSelfCareCategory: String {
+enum ExpenseSelfCareCategory: String,Codable {
     case supplements = "supplements"
     case gym = "gym"
     case hairProducts = "Hair Products"
@@ -76,7 +148,7 @@ enum ExpenseSelfCareCategory: String {
     var colorCode: UIColor { return .systemOrange }
 }
 
-enum ExpenseHomeCategory: String {
+enum ExpenseHomeCategory: String,Codable {
     case rent = "Rent"
     case utilities = "Utilities"
     case electronics = "Electronics"
@@ -88,7 +160,7 @@ enum ExpenseHomeCategory: String {
     var colorCode: UIColor { return .systemYellow }
 }
 
-enum ExpenseInvestmentCategory: String {
+enum ExpenseInvestmentCategory: String,Codable {
     case lifeInsurance = "lifeInsurance"
     case healthInsurance = "healthInsurance"
     case indianStocks = "indianStocks"
