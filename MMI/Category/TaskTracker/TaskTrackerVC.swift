@@ -25,17 +25,10 @@ class TaskTrackerVC: MMIBaseVC {
     
     lazy var viewModel = TaskTrackerVM(delegate: self)
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Task"
-        view.backgroundColor = .systemBackground
-    }
-    
     override func setUpView() {
         super.setUpView()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTask))
-        
+        title = "Task"
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -46,6 +39,15 @@ class TaskTrackerVC: MMIBaseVC {
         ])
     }
     
+    override func rightBarButtonItems() -> [UIBarButtonItem] {
+        var items = super.rightBarButtonItems()
+        items.append(contentsOf: [
+            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTask))
+        ])
+        return items
+    }
+
+    
     // MARK: - Actions
     
     @objc
@@ -54,7 +56,6 @@ class TaskTrackerVC: MMIBaseVC {
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
     }
-    
 }
 
 extension TaskTrackerVC: TaskTrackerDelegate {
@@ -69,7 +70,7 @@ extension TaskTrackerVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let tableViewCell = tableView.dequeueReusableCell(withIdentifier: String.init(describing: TaskTrackerTVC.self)) as? TaskTrackerTVC,
-            let task = viewModel.dataSource[viewModel.sections[indexPath.section].rawValue]?[indexPath.row] else {
+            let task = viewModel.dataSource[viewModel.sections[indexPath.section]]?[indexPath.row] else {
             return UITableViewCell()
         }
         tableViewCell.configureCell(with: task)
@@ -77,7 +78,7 @@ extension TaskTrackerVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.dataSource[viewModel.sections[section].rawValue]?.count ?? 0
+        return viewModel.dataSource[viewModel.sections[section]]?.count ?? 0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -108,7 +109,7 @@ extension TaskTrackerVC: UITableViewDelegate {
                                         title: "remove") { [weak self] (_, _, completionHandler) in
             guard
                 let self = self,
-                let task = viewModel.dataSource[viewModel.sections[indexPath.section].rawValue]?[indexPath.row] else {
+                let task = viewModel.dataSource[viewModel.sections[indexPath.section]]?[indexPath.row] else {
                 completionHandler(false)
                 return
             }
@@ -127,7 +128,7 @@ extension TaskTrackerVC: UITableViewDelegate {
                                         title: "") { [weak self] (_, _, completionHandler) in
             guard
                 let self = self,
-                let task = viewModel.dataSource[viewModel.sections[indexPath.section].rawValue]?[indexPath.row] else {
+                let task = viewModel.dataSource[viewModel.sections[indexPath.section]]?[indexPath.row] else {
                 completionHandler(false)
                 return
             }

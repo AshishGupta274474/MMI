@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum TaskPriority: String , Codable {
+enum TaskPriority: String , Codable, CaseIterable, Hashable {
     case high = "priority_high"
     case low = "priority_low"
     
@@ -24,6 +24,10 @@ enum TaskPriority: String , Codable {
         case .high: return .systemRed
         case .low: return .systemGreen
         }
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.rawValue)
     }
 }
 

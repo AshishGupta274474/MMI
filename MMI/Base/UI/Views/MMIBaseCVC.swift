@@ -16,6 +16,7 @@ class MMIBaseCVC: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setUpViews()
     }
     
     func setUpViews() {}

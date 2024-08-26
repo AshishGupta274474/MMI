@@ -37,9 +37,8 @@ class TaskManager: TaskManagerProtocol {
     
     private var tasks: [Task] {
         didSet {
-            print(tasks)
-            NotificationCenter.default.post(name: Notification.Name(updateNotificationName), object: nil)
             self.dataService?.update(tasks, for: key)
+            NotificationCenter.default.post(name: Notification.Name(updateNotificationName), object: nil)
         }
     }
     
@@ -49,7 +48,6 @@ class TaskManager: TaskManagerProtocol {
     
     public func remove(_ tasks: [Task]) {
         var resultTask: [Task] = []
-        print(self.tasks)
         self.tasks.forEach { currentTask in
             if !tasks.contains(where: { task in
                 return currentTask == task

@@ -17,6 +17,7 @@ class MMIView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
 }

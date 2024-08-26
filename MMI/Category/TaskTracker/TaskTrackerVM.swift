@@ -13,8 +13,8 @@ protocol TaskTrackerDelegate : AnyObject {
 
 class TaskTrackerVM {
     
-    var sections = [TaskPriority.high,TaskPriority.low]
-    var dataSource: [String:[Task]] = [TaskPriority.high.rawValue : [], TaskPriority.low.rawValue : []]
+    var sections = TaskPriority.allCases
+    var dataSource: [TaskPriority:[Task]] = [:]
     weak var delegate: TaskTrackerDelegate?
     weak var taskManager: TaskManagerProtocol?
     
@@ -22,20 +22,24 @@ class TaskTrackerVM {
         self.delegate = delegate
         self.taskManager = taskManager
         
-        NotificationCenter.default.addObserver(self, selector: #selector(taskListRefereshed), name: Notification.Name(taskManager.updateNotificationName), object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(taskListRefereshed),
+            name: Notification.Name(taskManager.updateNotificationName),
+            object: nil
+        )
 
         taskManager.refreshTask()
     }
     
     @objc
     func taskListRefereshed() {
-        dataSource[TaskPriority.high.rawValue] = taskManager?.fetchAllTask().filter({ task in
-            return task.priority == .high && !task.completed
-        })
-        dataSource[TaskPriority.low.rawValue] = taskManager?.fetchAllTask().filter({ task in
-            return task.priority == .low && !task.completed
-        })
-        
+        TaskPriority.allCases.forEach { [weak self] taskPriority in
+            guard let self = self else { return }
+            self.dataSource[taskPriority, default: []] = taskManager?.fetchAllTask().filter({ task in
+                return task.priority == taskPriority && !task.completed
+            }) ?? []
+        }
         delegate?.reloadData()
     }
     
@@ -49,7 +53,6 @@ class TaskTrackerVM {
         }
         taskManager?.update(tasks:tasks)
     }
-    
 
     deinit {
         NotificationCenter.default.removeObserver(self)

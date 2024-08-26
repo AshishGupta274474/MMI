@@ -14,5 +14,12 @@ class MMIBaseVC: UIViewController {
         setUpView()
     }
     
-    func setUpView(){}
+    func setUpView(){
+        view.backgroundColor = .systemBackground
+        navigationItem.rightBarButtonItems = rightBarButtonItems()
+    }
+    
+    func rightBarButtonItems() -> [UIBarButtonItem] {
+        return []
+    }
 }

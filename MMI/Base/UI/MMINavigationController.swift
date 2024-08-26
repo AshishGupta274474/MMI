@@ -12,7 +12,6 @@ class MMINavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationBar.prefersLargeTitles = true
-        title = "ashish"
     }
     
 
